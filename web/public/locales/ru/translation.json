@@ -1,0 +1,31 @@
+{
+    "header": {
+        "company name": "Clockwise Clockware",
+        "portfolio": "Портфолио",
+        "contacts": "Контакты",
+        "about us": "О нас",
+        "login": "Войти"
+    },
+    "mainText": {
+        "part1": "Со временем все будет хорошо,",
+        "part2": "а вот с часами всякое может случиться" 
+    },
+    "mainButton": "Заказать ремонт",
+    "adminPopup": {
+        "description": "Вход",
+        "password": "Пароль",
+        "button": "Войти"
+    },
+    "townsPage": {
+        "header": "Управление списком городов"
+    },
+    "clientsPage": {
+        "header": "Управление списком клиентов"
+    },
+    "mastersPage": {
+        "header": "Управление списком мастеров"
+    },
+    "adminPage": {
+        "header": "Управление списками сайта"
+    }
+}
