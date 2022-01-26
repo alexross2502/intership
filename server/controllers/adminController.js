@@ -1,12 +1,17 @@
 const { Admin } = require("../models/models");
+const ApiError = require("../error/apiError");
 
 class AdminController {
   async check(req, res) {
-    const { login, password } = req.params;
-    let availability = await Admin.findOne({
-      where: { email: login, password: password },
-    });
-    return res.json(!!availability);
+    try {
+      const { login, password } = req.body;
+      let availability = await Admin.findOne({
+        where: { email: login, password: password },
+      });
+      return res.json(!!availability);
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
   }
 }
 
