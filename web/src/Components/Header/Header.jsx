@@ -1,12 +1,12 @@
 import style from "./Header.module.css";
 import { useDispatch } from "react-redux";
-import { setActive } from "../../redux/modalWindowReducer";
+import { setModalActive } from "../../redux/modalWindowReducer";
 import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const dispatch = useDispatch();
   function onActiveClick() {
-    dispatch(setActive());
+    dispatch(setModalActive());
   }
 
   const { t } = useTranslation();

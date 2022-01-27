@@ -1,4 +1,4 @@
-const SET_ACTIVE = "SET_ACTIVE";
+const setActive = "setActive";
 
 const defaultState = {
   isActive: false,
@@ -6,7 +6,7 @@ const defaultState = {
 
 export default function modalWindowReducer(state = defaultState, action) {
   switch (action.type) {
-    case SET_ACTIVE:
+    case setActive:
       if (!state.isActive) {
         return {
           ...state,
@@ -24,4 +24,4 @@ export default function modalWindowReducer(state = defaultState, action) {
   }
 }
 
-export const setActive = () => ({ type: SET_ACTIVE });
+export const setModalActive = () => ({ type: setActive });

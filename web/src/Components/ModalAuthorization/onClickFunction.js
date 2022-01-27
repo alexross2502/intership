@@ -9,5 +9,11 @@ export async function onClickFunction() {
     },
     body: JSON.stringify(data),
   });
-  return await response.json();
+  return await response.json().then((answer) => {
+    if (answer) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 }

@@ -1,16 +1,24 @@
 import React from "react";
 import style from "./ModalAuthorization.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setActive } from "../../redux/modalWindowReducer";
+import { setModalActive } from "../../redux/modalWindowReducer";
+import { setAuthorized } from "../../redux/authorizationReducer";
 import { useTranslation } from "react-i18next";
 import { onClickFunction } from "./onClickFunction";
 
 const ModalAuthorization = () => {
-  const isActive = useSelector((state) => state.modalWindow.isActive);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  //Открытие\закрытие модального окна
+  const isActive = useSelector((state) => state.modalWindow.isActive);
   function onActiveClick() {
-    dispatch(setActive());
+    dispatch(setModalActive());
+  }
+  //Вход в админку
+  const isAuthorized = useSelector((state) => state.authorization.isAuthorized);
+  function successfulLogin() {
+    dispatch(setAuthorized());
+    //console.log(isAuthorized);
   }
 
   return (
@@ -42,7 +50,13 @@ const ModalAuthorization = () => {
               placeholder="Пароль"
               className={style.modal_input}
             ></input>
-            <a href="#" onClick={onClickFunction} className={style.modal_a}>
+            <a
+              href="#"
+              onClick={async () => {
+                if (await onClickFunction()) successfulLogin();
+              }}
+              className={style.modal_a}
+            >
               {t("adminPopup.button")}
             </a>
           </form>
