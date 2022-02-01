@@ -1,3 +1,4 @@
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 const AdminPage = () => {
@@ -7,3 +8,5 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
+
+//<div>{isAuthorized ? <Header /> : <Content />}</div>;

@@ -5,6 +5,7 @@ import { setModalActive } from "../../redux/modalWindowReducer";
 import { setAuthorized } from "../../redux/authorizationReducer";
 import { useTranslation } from "react-i18next";
 import { onClickFunction } from "./onClickFunction";
+import { useNavigate } from "react-router-dom";
 
 const ModalAuthorization = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,10 @@ const ModalAuthorization = () => {
   const isAuthorized = useSelector((state) => state.authorization.isAuthorized);
   function successfulLogin() {
     dispatch(setAuthorized());
-    //console.log(isAuthorized);
+    console.log(isAuthorized);
   }
+
+  const navigate = useNavigate();
 
   return (
     <div
@@ -53,7 +56,10 @@ const ModalAuthorization = () => {
             <a
               href="#"
               onClick={async () => {
-                if (await onClickFunction()) successfulLogin();
+                if (await onClickFunction()) {
+                  successfulLogin();
+                  navigate("/admin");
+                }
               }}
               className={style.modal_a}
             >

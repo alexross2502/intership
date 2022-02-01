@@ -6,6 +6,7 @@ import MainPage from "./MainPage";
 import MastersPage from "./AdminComponents/MastersPage/MastersPage";
 import TownsPage from "./AdminComponents/TownsPage/TownsPage";
 import AdminPage from "./AdminComponents/AdminPage/AdminPage";
+import { RequireAuth } from "./hoc/RequireAuth";
 
 function App() {
   return (
@@ -17,7 +18,14 @@ function App() {
             <Route path="/clients" element={<ClientPage />} />
             <Route path="/masters" element={<MastersPage />} />
             <Route path="/towns" element={<TownsPage />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route
+              path="/admin"
+              element={
+                <RequireAuth>
+                  <AdminPage />
+                </RequireAuth>
+              }
+            />
           </Routes>
         </Router>
       </div>
