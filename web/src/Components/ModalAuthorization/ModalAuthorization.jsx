@@ -5,9 +5,10 @@ import { setModalActive } from "../../redux/modalWindowReducer";
 import { setAuthorized } from "../../redux/authorizationReducer";
 import { useTranslation } from "react-i18next";
 import { onClickFunction } from "./onClickFunction";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const ModalAuthorization = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { t } = useTranslation();
   //Открытие\закрытие модального окна
@@ -18,6 +19,7 @@ const ModalAuthorization = () => {
   //Вход в админку
   function successfulLogin() {
     dispatch(setAuthorized());
+    history.push("/admin");
   }
 
   function failedLogin() {
@@ -28,8 +30,6 @@ const ModalAuthorization = () => {
     login.placeholder = "Введите правильный логин";
     pass.placeholder = "Введите правильный пароль";
   }
-
-  const navigate = useNavigate();
 
   return (
     <div
@@ -65,7 +65,6 @@ const ModalAuthorization = () => {
               onClick={async () => {
                 if (await onClickFunction()) {
                   successfulLogin();
-                  navigate("/admin");
                 } else {
                   failedLogin();
                 }
