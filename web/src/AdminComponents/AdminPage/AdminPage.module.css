@@ -1,0 +1,22 @@
+.container {
+  height: 100vh;
+  display: grid;
+}
+
+.leftSide {
+  grid-column: 1 / 2;
+  border: 2px solid rgb(3, 78, 9);
+  border-radius: 20px;
+}
+
+.leftSide__header {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.rightSide {
+  grid-column: 2 / 10;
+  border: 2px solid rgb(3, 78, 9);
+  border-radius: 20px;
+}
