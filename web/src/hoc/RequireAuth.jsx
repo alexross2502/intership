@@ -6,7 +6,7 @@ const RequireAuth = ({ children }) => {
   const isAuthorized = useSelector((state) => state.authorization.isAuthorized);
 
   if (!isAuthorized) {
-    console.log(isAuthorized);
+    alert("Вы не авторизованы");
     return <Navigate to="/" state={{ from: location }} />;
   }
 

@@ -16,10 +16,17 @@ const ModalAuthorization = () => {
     dispatch(setModalActive());
   }
   //Вход в админку
-  const isAuthorized = useSelector((state) => state.authorization.isAuthorized);
   function successfulLogin() {
     dispatch(setAuthorized());
-    console.log(isAuthorized);
+  }
+
+  function failedLogin() {
+    let login = document.getElementsByName("email")[0];
+    let pass = document.getElementsByName("pass")[0];
+    login.value = "";
+    pass.value = "";
+    login.placeholder = "Введите правильный логин";
+    pass.placeholder = "Введите правильный пароль";
   }
 
   const navigate = useNavigate();
@@ -59,6 +66,8 @@ const ModalAuthorization = () => {
                 if (await onClickFunction()) {
                   successfulLogin();
                   navigate("/admin");
+                } else {
+                  failedLogin();
                 }
               }}
               className={style.modal_a}
