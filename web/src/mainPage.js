@@ -1,3 +1,4 @@
+import style from "./MainPage.module.css";
 import Header from "./Components/Header/Header";
 import Content from "./Components/Content/Content";
 import ModalAuthorization from "./Components/ModalAuthorization/ModalAuthorization";
@@ -5,9 +6,11 @@ import ModalAuthorization from "./Components/ModalAuthorization/ModalAuthorizati
 const MainPage = () => {
   return (
     <div>
-      <Header />
-      <Content />
-      <ModalAuthorization />
+      <div className={style.background}>
+        <Header />
+        <Content />
+        <ModalAuthorization />
+      </div>
     </div>
   );
 };
