@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense } from "react";
 import MainPage from "./MainPage";
 import AdminPage from "./AdminComponents/AdminPage/AdminPage";
@@ -10,14 +10,17 @@ function App() {
     <Suspense fallback="loading">
       <div className="App">
         <Router>
-          <Switch>
-            <Route exact path="/" component={MainPage} />
-            <Route path="/admin">
-              <RequireAuth>
-                <AdminPage />
-              </RequireAuth>
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route
+              path="/admin"
+              element={
+                <RequireAuth>
+                  <AdminPage />
+                </RequireAuth>
+              }
+            />
+          </Routes>
         </Router>
       </div>
     </Suspense>

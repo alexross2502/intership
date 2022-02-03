@@ -1,4 +1,4 @@
-import { useLocation, Redirect } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const RequireAuth = ({ children }) => {
@@ -7,7 +7,7 @@ const RequireAuth = ({ children }) => {
 
   if (!isAuthorized) {
     alert("Вы не авторизованы");
-    return <Redirect to="/" state={{ from: location }} />;
+    return <Navigate to="/" state={{ from: location }} />;
   }
 
   return children;

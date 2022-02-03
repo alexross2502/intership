@@ -1,17 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./AdminPage.module.css";
 import { useTranslation } from "react-i18next";
 import ListSelector from "./Components/ListSelector";
+import ListSelectorButton from "./Components/ListSelectorButton";
 
 const AdminPage = () => {
   const { t } = useTranslation();
+  let [page, setPage] = useState("clients");
+
+  function switchFunction(page) {
+    setPage(page);
+  }
 
   return (
     <div className={style.container}>
       <div className={style.leftSide}>
-        <p className={style.leftSide__header}>{t("adminPage.header")}</p>
+        <p className={style.header}>{t("adminPage.header")}</p>
+        <div
+          className={style.switchButton}
+          onClick={() => switchFunction("clients")}
+        >
+          <ListSelectorButton name="clients" />
+        </div>
+        <div
+          className={style.switchButton}
+          onClick={() => switchFunction("masters")}
+        >
+          <ListSelectorButton name="masters" />
+        </div>
+        <div
+          className={style.switchButton}
+          onClick={() => switchFunction("towns")}
+        >
+          <ListSelectorButton name="towns" />
+        </div>
       </div>
-      <div className={style.rightSide}></div>
+      <div className={style.rightSide}>
+        <ListSelector page={page} />
+      </div>
     </div>
   );
 };
