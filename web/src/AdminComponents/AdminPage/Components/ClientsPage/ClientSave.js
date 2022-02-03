@@ -9,5 +9,7 @@ export async function clientSave(name, email) {
     },
     body: JSON.stringify(data),
   });
-  return await response.json();
+  return await response.json().then((answer) => {
+    return answer;
+  });
 }

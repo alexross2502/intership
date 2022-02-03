@@ -8,6 +8,7 @@ export default function AddInput(props) {
       <Input
         placeholder={props.placeholder}
         inputProps={{ "aria-label": "description" }}
+        id={props.id}
       />
     </div>
   );
