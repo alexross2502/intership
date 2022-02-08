@@ -5,7 +5,7 @@ class TownsController {
   async create(req, res) {
     try {
       const { name } = req.body;
-      const town = await Towns.create({ name });
+      const town = await Towns.create({ name: name });
       return res.json(town);
     } catch (e) {
       next(ApiError.badRequest(e.message));

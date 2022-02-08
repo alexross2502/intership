@@ -4,8 +4,8 @@ const ApiError = require("../error/apiError");
 class MastersController {
   async create(req, res) {
     try {
-      const { name, surname, rating } = req.body;
-      const master = await Masters.create({ name, surname, rating });
+      const { name, surname, rating, townName } = req.body;
+      const master = await Masters.create({ name, surname, rating, townName });
       return res.json(master);
     } catch (e) {
       next(ApiError.badRequest(e.message));
