@@ -4,20 +4,28 @@ import { useSelector, useDispatch } from "react-redux";
 import { setModalActive } from "../../redux/modalWindowReducer";
 import { setAuthorized } from "../../redux/authorizationReducer";
 import { useTranslation } from "react-i18next";
-import { onClickFunction } from "./onClickFunction";
+import { authCheck } from "./authCheck";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const ModalAuthorization = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm({
+    mode: "onBlur",
+  });
   //Открытие\закрытие модального окна
   const isActive = useSelector((state) => state.modalWindow.isActive);
+  const [isAuthData, setAuthData] = useState("");
   function onActiveClick() {
     dispatch(setModalActive());
-  }
-  //Вход в админку
-  function successfulLogin() {
-    dispatch(setAuthorized());
   }
 
   function failedLogin() {
@@ -29,7 +37,15 @@ const ModalAuthorization = () => {
     pass.placeholder = "Введите правильный пароль";
   }
 
-  const navigate = useNavigate();
+  async function authController(data) {
+    if ((await authCheck(data)) == true) {
+      dispatch(setAuthorized());
+      navigate("/admin");
+    } else {
+      reset();
+      setAuthData(`${t("adminPopup.vrongAuth")}`);
+    }
+  }
 
   return (
     <div
@@ -47,33 +63,30 @@ const ModalAuthorization = () => {
             ></img>
           </span>
 
-          <form className={style.modal_form}>
+          <form
+            className={style.modal_form}
+            onSubmit={handleSubmit(authController)}
+          >
             <input
-              type="email"
               name="email"
               placeholder="E-mail"
               className={style.modal_input}
+              {...register("email", {
+                required: true,
+              })}
             ></input>
             <input
-              type={t("adminPopup.password")}
-              name="pass"
+              name="password"
               placeholder="Пароль"
               className={style.modal_input}
+              {...register("password", {
+                required: true,
+              })}
             ></input>
-            <a
-              href="#"
-              onClick={async () => {
-                if (await onClickFunction()) {
-                  successfulLogin();
-                  navigate("/admin");
-                } else {
-                  failedLogin();
-                }
-              }}
-              className={style.modal_a}
-            >
+            {<p className={style.errorMessage}>{isAuthData}</p>}
+            <button type="submit" className={style.modal_a}>
               {t("adminPopup.button")}
-            </a>
+            </button>
           </form>
         </div>
       </div>

@@ -14,7 +14,8 @@
     "adminPopup": {
         "description": "Вход",
         "password": "Пароль",
-        "button": "Войти"
+        "button": "Войти",
+        "vrongAuth": "Неверный логин или пароль"
     },
     "townsPage": {
         "header": "Управление списком городов:"

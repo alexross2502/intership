@@ -1,7 +1,7 @@
-export async function onClickFunction() {
+export async function authCheck(formData) {
   let data = {};
-  data.login = document.getElementsByName("email")[0].value;
-  data.password = document.getElementsByName("pass")[0].value;
+  data.password = formData.password;
+  data.login = formData.email;
   const response = await fetch("http://localhost:8080/api/admin", {
     method: "POST",
     headers: {
