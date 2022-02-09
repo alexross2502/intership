@@ -1,5 +1,5 @@
 const { Towns } = require("../models/models");
-const ApiError = require("../error/apiError");
+const ApiError = require("../error/ApiError");
 
 class TownsController {
   async create(req, res, next) {

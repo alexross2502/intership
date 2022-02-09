@@ -13,7 +13,7 @@ const Towns = sequelize.define("towns", {
 });
 
 Towns.hasMany(Masters, {
-  sourceKey: "name",
+  as: "TownName",
   foreignKey: "townName",
 });
 

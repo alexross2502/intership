@@ -1,5 +1,5 @@
 const { Admin } = require("../models/models");
-const ApiError = require("../error/apiError");
+const ApiError = require("../error/ApiError");
 
 class AdminController {
   async check(req, res, next) {
