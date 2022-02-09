@@ -24,17 +24,9 @@ const ModalAuthorization = () => {
   //Открытие\закрытие модального окна
   const isActive = useSelector((state) => state.modalWindow.isActive);
   const [isAuthData, setAuthData] = useState("");
+
   function onActiveClick() {
     dispatch(setModalActive());
-  }
-
-  function failedLogin() {
-    let login = document.getElementsByName("email")[0];
-    let pass = document.getElementsByName("pass")[0];
-    login.value = "";
-    pass.value = "";
-    login.placeholder = "Введите правильный логин";
-    pass.placeholder = "Введите правильный пароль";
   }
 
   async function authController(data) {
@@ -72,18 +64,31 @@ const ModalAuthorization = () => {
               placeholder="E-mail"
               className={style.modal_input}
               {...register("email", {
-                required: true,
+                required: `${t("adminPopup.emptyField")}`,
+                pattern: {
+                  value:
+                    /^([a-z0-9_-]+.)*[a-z0-9_-]+@[a-z0-9_-]+(.[a-z0-9_-]+)*.[a-z]{2,6}$/,
+                  message: `${t("adminPopup.vrongFormat")}`,
+                },
               })}
             ></input>
+            {
+              <p className={style.errorMessage}>
+                {errors?.email && errors?.email.message}
+              </p>
+            }
             <input
               name="password"
               placeholder="Пароль"
               className={style.modal_input}
               {...register("password", {
-                required: true,
+                required: `${t("adminPopup.emptyField")}`,
               })}
             ></input>
-            {<p className={style.errorMessage}>{isAuthData}</p>}
+            <p className={style.errorMessage}>
+              {errors?.password && errors?.password?.message}
+            </p>
+            <p className={style.errorMessage}>{isAuthData}</p>
             <button type="submit" className={style.modal_a}>
               {t("adminPopup.button")}
             </button>
