@@ -2,7 +2,7 @@ const { Admin } = require("../models/models");
 const ApiError = require("../error/apiError");
 
 class AdminController {
-  async check(req, res) {
+  async check(req, res, next) {
     try {
       const { login, password } = req.body;
       let availability = await Admin.findOne({

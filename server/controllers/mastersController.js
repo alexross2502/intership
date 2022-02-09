@@ -2,7 +2,7 @@ const { Masters } = require("../models/models");
 const ApiError = require("../error/apiError");
 
 class MastersController {
-  async create(req, res) {
+  async create(req, res, next) {
     try {
       const { name, surname, rating, townName } = req.body;
       const master = await Masters.create({ name, surname, rating, townName });

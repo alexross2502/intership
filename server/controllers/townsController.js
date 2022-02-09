@@ -2,7 +2,7 @@ const { Towns } = require("../models/models");
 const ApiError = require("../error/apiError");
 
 class TownsController {
-  async create(req, res) {
+  async create(req, res, next) {
     try {
       const { name } = req.body;
       const town = await Towns.create({ name: name });
