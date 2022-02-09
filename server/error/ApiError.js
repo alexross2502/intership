@@ -5,6 +5,10 @@ class ApiError extends Error {
     this.message = message;
   }
 
+  static forbidden(message) {
+    return new ApiError(403, message);
+  }
+
   static badRequest(message) {
     return new ApiError(404, message);
   }
@@ -13,8 +17,16 @@ class ApiError extends Error {
     return new ApiError(500, message);
   }
 
-  static forbidden(message) {
-    return new ApiError(403, message);
+  static badGateway(message) {
+    return new ApiError(502, message);
+  }
+
+  static serviceUnavailable(message) {
+    return new ApiError(503, message);
+  }
+
+  static gatewayTimeout(message) {
+    return new ApiError(504, message);
   }
 }
 
