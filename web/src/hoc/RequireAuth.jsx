@@ -5,9 +5,9 @@ import { setModalActive } from "../redux/modalWindowReducer";
 const RequireAuth = ({ children }) => {
   const location = useLocation();
   const isAuthorized = useSelector((state) => state.authorization.isAuthorized);
+  const dispatch = useDispatch();
 
   if (!isAuthorized) {
-    const dispatch = useDispatch();
     dispatch(setModalActive());
     return <Navigate to="/" state={{ from: location }} />;
   }
