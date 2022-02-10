@@ -2,8 +2,10 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense } from "react";
 import MainPage from "./MainPage";
-import AdminPage from "./AdminComponents/AdminPage/AdminPage";
 import { RequireAuth } from "./hoc/RequireAuth";
+import ClientPage from "./AdminComponents/Components/ClientsPage/ClientPage";
+import MastersPage from "./AdminComponents/Components/MastersPage/MastersPage";
+import TownsPage from "./AdminComponents/Components/TownsPage/TownsPage";
 
 function App() {
   return (
@@ -13,10 +15,26 @@ function App() {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route
-              path="/admin"
+              path="/clients"
               element={
                 <RequireAuth>
-                  <AdminPage />
+                  <ClientPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/masters"
+              element={
+                <RequireAuth>
+                  <MastersPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/towns"
+              element={
+                <RequireAuth>
+                  <TownsPage />
                 </RequireAuth>
               }
             />

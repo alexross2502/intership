@@ -32,7 +32,7 @@ const ModalAuthorization = () => {
   async function authController(data) {
     if ((await authCheck(data)) == true) {
       dispatch(setAuthorized());
-      navigate("/admin");
+      navigate("/clients");
     } else {
       reset();
       setAuthData(`${t("adminPopup.vrongAuth")}`);

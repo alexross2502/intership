@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import style from "./AdminPage.module.css";
 import { useTranslation } from "react-i18next";
-import ListSelector from "./Components/ListSelector";
 import ListSelectorButton from "./Components/ListSelectorButton";
 
 const AdminPage = () => {
@@ -36,7 +35,7 @@ const AdminPage = () => {
         </div>
       </div>
       <div className={style.rightSide}>
-        <ListSelector page={page} />
+        <p>sdads</p>
       </div>
     </div>
   );
