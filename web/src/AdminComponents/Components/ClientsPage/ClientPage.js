@@ -4,6 +4,7 @@ import { SaveButton } from "../SaveButton";
 import React, { useEffect } from "react";
 import { clientSave } from "./ClientSave";
 import { LeftSideMenu } from "../../LeftSideMenu";
+import { InputText } from "../../InputText";
 
 const ClientPage = () => {
   const { t } = useTranslation();
@@ -15,8 +16,8 @@ const ClientPage = () => {
         <p className={style.header}>{t("clientsPage.header")}</p>
         <div className={style.addContainer}>
           <p className={style.subtitle}>{t("adminPage.addClient")}</p>
-          <input type="email" placeholder="Email" id="emailInput" />
-          <input type="name" placeholder="Имя" id="nameInput" />
+          <InputText />
+          <InputText />
           <span className={style.saveButton}>
             <SaveButton id="saveButton" />
           </span>
