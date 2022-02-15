@@ -1,3 +1,8 @@
+.inputText::placeholder {
+  color: red;
+  font-style: italic;
+}
+
 .container {
   height: 100vh;
 }
@@ -96,4 +101,16 @@
   left: -5px;
   opacity: 0.8;
   box-shadow: 8px 4px 5px #013713;
+}
+
+/* saveButton */
+
+.saveButton {
+  background-color: #008cba;
+  font-size: 15px;
+  padding: 2px;
+  border-radius: 8px;
+  width: 80px;
+  height: 30px;
+  margin: 15px;
 }

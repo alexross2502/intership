@@ -1,27 +1,51 @@
 import { useTranslation } from "react-i18next";
 import style from "../../AdminPage.module.css";
 import { SaveButton } from "../SaveButton";
-import React, { useEffect } from "react";
+import React from "react";
 import { clientSave } from "./ClientSave";
 import { LeftSideMenu } from "../../LeftSideMenu";
-import { InputText } from "../../InputText";
+import { useForm } from "react-hook-form";
 
 const ClientPage = () => {
   const { t } = useTranslation();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm({
+    mode: "onBlur",
+  });
+  async function newClient(data) {
+    console.log(data);
+  }
 
   return (
-    <div className={style.container}>
+    <div className={style.container} onSubmit={handleSubmit(newClient)}>
       <LeftSideMenu />
       <div className={style.rightSide}>
         <p className={style.header}>{t("clientsPage.header")}</p>
-        <div className={style.addContainer}>
+        <form className={style.addContainer}>
           <p className={style.subtitle}>{t("adminPage.addClient")}</p>
-          <InputText />
-          <InputText />
-          <span className={style.saveButton}>
-            <SaveButton id="saveButton" />
-          </span>
-        </div>
+          <div className={style.inputContainer}>
+            <input
+              className={style.inputText}
+              type="text"
+              placeholder="Имя"
+              {...register("firtsName")}
+            ></input>
+          </div>
+          <div className={style.inputContainer}>
+            <input
+              className={style.inputText}
+              type="text"
+              placeholder="Фамилия"
+              {...register("secondName")}
+            ></input>
+          </div>
+
+          <SaveButton id="saveButton" />
+        </form>
         <div>
           <p className={style.subtitle}>{t("adminPage.list")}</p>
         </div>
