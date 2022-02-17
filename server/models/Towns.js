@@ -1,6 +1,5 @@
 const sequelize = require("../db");
 const { DataTypes } = require("sequelize");
-const { Masters } = require("./Masters");
 
 const Towns = sequelize.define("towns", {
   id: {
@@ -10,11 +9,6 @@ const Towns = sequelize.define("towns", {
     unique: true,
   },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
-});
-
-Towns.hasMany(Masters, {
-  as: "TownName",
-  foreignKey: "townName",
 });
 
 module.exports = { Towns };
