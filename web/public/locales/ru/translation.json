@@ -37,6 +37,8 @@
         "addClient" : "Добавить клиента:",
         "addMaster" : "Добавить мастера:",
         "list" : "Список:",
-        "save" : "Сохранить"
+        "saveButton" : "Сохранить",
+        "updateButton" : "Обновить",
+        "deleteButton" : "Удалить"
     }
 }

@@ -1,13 +1,21 @@
 import { useTranslation } from "react-i18next";
 import style from "../../AdminPage.module.css";
-import { SaveButton } from "../SaveButton";
-import React from "react";
+import { FormButton } from "../FormButton";
+import React, { useEffect, useState } from "react";
 import { clientSave } from "./ClientSave";
 import { LeftSideMenu } from "../../LeftSideMenu";
 import { useForm } from "react-hook-form";
+import { GetAll } from "../GetAll";
+import { ClientForm } from "./ClientForm";
 
 const ClientPage = () => {
   const { t } = useTranslation();
+  const [clientsList, setClientsList] = useState([]);
+  useEffect(async () => {
+    let clients = [...(await GetAll("clients"))];
+    setClientsList(clients);
+  });
+
   const {
     handleSubmit,
     register,
@@ -17,8 +25,12 @@ const ClientPage = () => {
     mode: "onBlur",
   });
   async function newClient(data) {
-    console.log(data);
+    clientSave(data.firstName, data.email);
   }
+
+  const clientListItem = clientsList.map((item) => {
+    return <ClientForm data={item} key={item.id} />;
+  });
 
   return (
     <div className={style.container} onSubmit={handleSubmit(newClient)}>
@@ -32,22 +44,23 @@ const ClientPage = () => {
               className={style.inputText}
               type="text"
               placeholder="Имя"
-              {...register("firtsName")}
+              {...register("firstName")}
             ></input>
           </div>
           <div className={style.inputContainer}>
             <input
               className={style.inputText}
               type="text"
-              placeholder="Фамилия"
-              {...register("secondName")}
+              placeholder="Email"
+              {...register("email")}
             ></input>
           </div>
-
-          <SaveButton id="saveButton" />
+          <FormButton buttonType="saveButton" />
         </form>
         <div>
           <p className={style.subtitle}>{t("adminPage.list")}</p>
+          <div className={style.listContainer}></div>
+          {clientListItem}
         </div>
       </div>
     </div>
