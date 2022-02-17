@@ -11,10 +11,16 @@ import { ClientForm } from "./ClientForm";
 const ClientPage = () => {
   const { t } = useTranslation();
   const [clientsList, setClientsList] = useState([]);
+  //Это временная заглушка, я ее уберу
+  const [rerender, setRerender] = useState(0);
+  setTimeout(() => {
+    setRerender(rerender + 1);
+  }, 500);
+  //******** */
   useEffect(async () => {
     let clients = [...(await GetAll("clients"))];
     setClientsList(clients);
-  });
+  }, [rerender]);
 
   const {
     handleSubmit,
