@@ -4,10 +4,12 @@ import authorizationReducer from "./authorizationReducer";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import rerenderReducer from "./rerenderReducer";
 
 const rootReducer = combineReducers({
   modalWindow: modalWindowReducer,
   authorization: authorizationReducer,
+  rerender: rerenderReducer,
 });
 
 export const store = createStore(

@@ -2,26 +2,31 @@ import { useTranslation } from "react-i18next";
 import style from "../../AdminPage.module.css";
 import { FormButton } from "../FormButton";
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { clientSave } from "./ClientSave";
 import { LeftSideMenu } from "../../LeftSideMenu";
 import { useForm } from "react-hook-form";
 import { ClientForm } from "./ClientForm";
 import Api from "../api";
+import { setPageRerender } from "../../../redux/rerenderReducer";
 
 const ClientPage = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const rerender = useSelector((state) => state.rerender.isRerender);
   const [clientsList, setClientsList] = useState([]);
 
   useEffect(async () => {
     let clients = [...(await Api.getAll("clients"))];
     setClientsList(clients);
-  }, []);
+  }, [rerender]);
 
   const { handleSubmit, register } = useForm({
     mode: "onBlur",
   });
   async function newClient(data) {
     clientSave(data.firstName, data.email);
+    dispatch(setPageRerender());
   }
 
   const clientListItem = clientsList.map((item) => {
