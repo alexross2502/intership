@@ -5,29 +5,19 @@ import React, { useEffect, useState } from "react";
 import { clientSave } from "./ClientSave";
 import { LeftSideMenu } from "../../LeftSideMenu";
 import { useForm } from "react-hook-form";
-import { GetAll } from "../GetAll";
 import { ClientForm } from "./ClientForm";
+import Api from "../api";
 
 const ClientPage = () => {
   const { t } = useTranslation();
   const [clientsList, setClientsList] = useState([]);
-  //Это временная заглушка, я ее уберу
-  const [rerender, setRerender] = useState(0);
-  setTimeout(() => {
-    setRerender(rerender + 1);
-  }, 500);
-  //******** */
-  useEffect(async () => {
-    let clients = [...(await GetAll("clients"))];
-    setClientsList(clients);
-  }, [rerender]);
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-    reset,
-  } = useForm({
+  useEffect(async () => {
+    let clients = [...(await Api.getAll("clients"))];
+    setClientsList(clients);
+  }, []);
+
+  const { handleSubmit, register } = useForm({
     mode: "onBlur",
   });
   async function newClient(data) {

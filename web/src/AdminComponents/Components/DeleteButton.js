@@ -1,7 +1,7 @@
 import React from "react";
 import style from "../AdminPage.module.css";
 import { useTranslation } from "react-i18next";
-import { DeleteController } from "./DeleteController";
+import Api from "./api";
 
 export const DeleteButton = (props) => {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ export const DeleteButton = (props) => {
       type="button"
       className={style[props.buttonType]}
       onClick={() => {
-        DeleteController(props.url, props.id);
+        Api.delete(props.url, props.id);
       }}
     >
       {t(`adminPage.${props.buttonType}`)}
