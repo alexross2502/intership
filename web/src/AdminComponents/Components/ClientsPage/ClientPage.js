@@ -3,7 +3,7 @@ import style from "../../AdminPage.module.css";
 import { FormButton } from "../FormButton";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clientSave } from "./ClientSave";
+import { clientSave } from "./clientSave";
 import { LeftSideMenu } from "../../LeftSideMenu";
 import { useForm } from "react-hook-form";
 import { ClientForm } from "./ClientForm";
