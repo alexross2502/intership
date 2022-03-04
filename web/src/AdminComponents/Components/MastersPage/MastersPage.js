@@ -65,7 +65,7 @@ const MastersPage = () => {
               {...register("surname")}
             ></input>
           </div>
-          <select {...register("rating")}>
+          <select {...register("rating")} className={style.select}>
             <option selected value="1">
               1
             </option>
@@ -74,7 +74,9 @@ const MastersPage = () => {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <select {...register("town")}>{townListItem}</select>
+          <select {...register("town")} className={style.select}>
+            {townListItem}
+          </select>
           <FormButton buttonType="saveButton" />
         </form>
         <div>
