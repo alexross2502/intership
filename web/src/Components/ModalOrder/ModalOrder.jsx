@@ -41,10 +41,19 @@ const ModalOrder = () => {
     );
   });
 
+  //Временная мера
+  const dataParser = (date, time) => {
+    let dateObj = {};
+    dateObj.day = date.toString().slice(8, 10);
+    dateObj.month = date.toString().slice(4, 7);
+    dateObj.year = date.toString().slice(11, 15);
+    dateObj.time = time.toString().slice(16, 18);
+    return dateObj;
+  };
+
   const formSend = (data) => {
     console.log(data);
-    console.log(selectedDate);
-    console.log(selectedTime);
+    console.log(dataParser(selectedDate, selectedTime));
   };
 
   return (
