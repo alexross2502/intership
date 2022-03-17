@@ -2,6 +2,8 @@ const Router = require("express");
 const router = new Router();
 const reservationController = require("../controllers/reservationController");
 
-router.get("/auth", reservationController.authCheck);
+router.get("/", reservationController.getAll);
+//router.post("/", reservationController.create);
+router.delete("/:id", reservationController.destroy);
 
 module.exports = router;
