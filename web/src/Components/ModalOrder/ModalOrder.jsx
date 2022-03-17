@@ -5,6 +5,9 @@ import { setModalOrder } from "../../redux/orderReducer";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import Api from "../../AdminComponents/Components/api";
+import { FormButton } from "../../AdminComponents/Components/FormButton";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const ModalOrder = () => {
   const dispatch = useDispatch();
@@ -19,7 +22,8 @@ const ModalOrder = () => {
   });
   //Открытие\закрытие модального окна
   const isActive = useSelector((state) => state.order.isActive);
-
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
   function onActiveClick() {
     dispatch(setModalOrder());
   }
@@ -28,7 +32,7 @@ const ModalOrder = () => {
   useEffect(async () => {
     let towns = [...(await Api.getAll("towns"))];
     setTownsList(towns);
-  });
+  }, []);
   const townListItem = townsList.map((item) => {
     return (
       <option value={item.name} key={item.id}>
@@ -36,6 +40,12 @@ const ModalOrder = () => {
       </option>
     );
   });
+
+  const formSend = (data) => {
+    console.log(data);
+    console.log(selectedDate);
+    console.log(selectedTime);
+  };
 
   return (
     <div
@@ -53,7 +63,7 @@ const ModalOrder = () => {
             ></img>
           </span>
 
-          <form className={style.modal_form} onSubmit={handleSubmit()}>
+          <form className={style.modal_form} onSubmit={handleSubmit(formSend)}>
             <p>{t("order.name")}</p>
             <input
               name="name"
@@ -88,36 +98,26 @@ const ModalOrder = () => {
               {townListItem}
             </select>
             <p>{t("order.date")}</p>
-            <input type="date" className={style.date}></input>
+            <DatePicker
+              className={style.select}
+              selected={selectedDate}
+              dateFormat="dd/MM/yyyy"
+              minDate={new Date()}
+              filterDate={(date) => date.getDay() != 6 && date.getDay() != 0}
+              onChange={(date) => setSelectedDate(date)}
+            />
             <p>{t("order.time")}</p>
-            <select {...register("hour")} className={style.select}>
-              <option selected value="1">
-                01:00
-              </option>
-              <option value="2">02:00</option>
-              <option value="3">03:00</option>
-              <option value="4">04:00</option>
-              <option value="5">05:00</option>
-              <option value="6">06:00</option>
-              <option value="7">07:00</option>
-              <option value="8">08:00</option>
-              <option value="9">09:00</option>
-              <option value="10">10:00</option>
-              <option value="11">11:00</option>
-              <option value="12">12:00</option>
-              <option value="13">13:00</option>
-              <option value="14">14:00</option>
-              <option value="15">15:00</option>
-              <option value="16">16:00</option>
-              <option value="17">17:00</option>
-              <option value="18">18:00</option>
-              <option value="19">19:00</option>
-              <option value="20">20:00</option>
-              <option value="21">21:00</option>
-              <option value="22">22:00</option>
-              <option value="23">23:00</option>
-              <option value="24">00:00</option>
-            </select>
+            <DatePicker
+              className={style.select}
+              selected={selectedTime}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={60}
+              dateFormat="h:mm"
+              onChange={(time) => setSelectedTime(time)}
+            />
+
+            <FormButton buttonType="saveButton" />
           </form>
         </div>
       </div>

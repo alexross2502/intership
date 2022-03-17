@@ -35,7 +35,7 @@
   bottom: 0;
   margin: auto;
   width: 80%;
-  height: 80%;
+  height: 90%;
   border-radius: 5px;
   background: rgb(102, 102, 102);
   box-shadow: 1px 1px 50px #000;
@@ -179,11 +179,4 @@ p {
   box-shadow: 0 0 0 3px -moz-mac-focusring;
   color: #222;
   outline: none;
-}
-
-.date {
-  position: relative;
-  width: 80%;
-  margin: 10px auto;
-  display: block;
 }
