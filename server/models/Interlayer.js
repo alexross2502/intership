@@ -14,7 +14,7 @@ Masters.hasOne(Towns, {
 
 Masters.hasMany(Reservation, {
   sourceKey: "id",
-  foreignKey: "id",
+  foreignKey: "master_id",
   constraints: false,
 });
 

@@ -45,7 +45,9 @@ const ClientPage = () => {
               className={style.inputText}
               type="text"
               placeholder="Имя"
-              {...register("firstName")}
+              {...register("firstName", {
+                required: `${t("adminPopup.emptyField")}`,
+              })}
             ></input>
           </div>
           <div className={style.inputContainer}>
@@ -53,7 +55,14 @@ const ClientPage = () => {
               className={style.inputText}
               type="text"
               placeholder="Email"
-              {...register("email")}
+              {...register("email", {
+                required: `${t("adminPopup.emptyField")}`,
+                pattern: {
+                  value:
+                    /^([a-z0-9_-]+.)*[a-z0-9_-]+@[a-z0-9_-]+(.[a-z0-9_-]+)*.[a-z]{2,6}$/,
+                  message: `${t("adminPopup.vrongFormat")}`,
+                },
+              })}
             ></input>
           </div>
           <FormButton buttonType="saveButton" />
