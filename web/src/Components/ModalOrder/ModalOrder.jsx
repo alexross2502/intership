@@ -41,7 +41,6 @@ const ModalOrder = () => {
     );
   });
 
-  //Временная мера
   const dataParser = (date, time) => {
     let dateObj = {};
     dateObj.day = date.toString().slice(8, 10);
